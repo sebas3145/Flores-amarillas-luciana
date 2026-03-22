@@ -5,219 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Luciana</title>
     <style>
-        :root {
-            --bg-color: #fdfaf2;
-            --text-color: #4a5d23;
-            --accent-color: #8da441;
-        }
+        body { margin: 0; padding: 0; background-color: #fdfae6; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+        .container { width: 100%; max-width: 500px; display: flex; flex-direction: column; }
+        
+        /* Estilo para las imágenes normales */
+        img { width: 100%; height: auto; display: block; margin: 0; padding: 0; }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow: hidden;
-        }
+        /* Estilo para las imágenes que son botones */
+        .btn-img { cursor: pointer; transition: transform 0.2s; }
+        .btn-img:active { transform: scale(0.98); } /* Efecto de pulsado */
 
-        .screen {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-            transition: transform 0.6s ease-in-out;
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-        }
-
-        /* Ocultar pantallas */
-        .hidden { transform: translateY(100%); }
-        .active { transform: translateY(0); }
-        .prev { transform: translateY(-100%); }
-
-        .number {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 3rem;
-            opacity: 0.8;
-        }
-
-        h1, p { margin: 10px 0; }
-        .name { font-size: 2.5rem; color: var(--text-color); font-weight: bold; }
-
-        .btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .initials-container {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .heart {
-            background: #fff8e1;
-            border: 2px solid #f9e1a0;
-            width: 60px;
-            height: 60px;
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.5rem;
-            position: relative;
-        }
-
-        /* Estilo Snoopy Simulado */
-        .illustration { width: 200px; height: auto; margin: 20px 0; }
-
-        /* Pantalla 4: Sobre */
-        .envelope {
-            width: 200px;
-            height: 140px;
-            background: #f4f1ea;
-            border: 1px solid #ddd;
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        .envelope::after {
-            content: "🌻";
-            font-size: 2rem;
-        }
-
-        .scroll-hint {
-            position: absolute;
-            bottom: 20px;
-            animation: bounce 2s infinite;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-
-        .letter-content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 80%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            line-height: 1.6;
-        }
+        /* Ocultamos las secciones que no deben verse al inicio */
+        #seccion-deslizable, #foto5 { display: none; }
     </style>
 </head>
 <body>
 
-    <div id="s1" class="screen active">
-        <div class="number">1</div>
-        <p style="font-size: 1.5rem;">Para</p>
-        <div class="name">Luciana</div>
-        <div class="initials-container">
-            <div class="heart">L</div>
-            <div class="heart">S</div>
+    <div class="container">
+        <img src="1.png.jpeg" alt="Parte 1" class="btn-img" id="foto1">
+
+        <div id="seccion-deslizable">
+            <img src="2.png.jpeg" alt="Parte 2">
+            <img src="3.png.jpeg" alt="Parte 3">
+            
+            <img src="4.png.jpeg" alt="Parte 4" class="btn-img" id="foto4">
         </div>
-        <img src="https://i.pinimg.com/originals/93/29/18/9329188267425121e7d23d8573229b43.png" class="illustration" alt="Snoopy">
-        <button class="btn" onclick="nextScreen(2)">VER REGALO</button>
-    </div>
 
-    <div id="s2" class="screen hidden">
-        <div class="number">2</div>
-        <img src="https://i.pinimg.com/originals/16/91/92/16919280d90802d348006e12915852b7.png" style="width:100px" alt="Snoopy feliz">
-        <h2 style="font-size: 1.8rem;">Te amo,<br>y estas flores amarillas son para ti.</h2>
-        <div style="font-size: 5rem;">🌻🌻🌻</div>
-        <div class="scroll-hint" onclick="nextScreen(3)">▼</div>
-    </div>
-
-    <div id="s3" class="screen hidden">
-        <div class="number">3</div>
-        <p style="font-size: 1.4rem; max-width: 300px;">
-            Cada flor es un pequeño recordatorio de lo especial que eres para mí. 
-            Y recuerdes que alguien está pensando en ti.
-        </p>
-        <img src="https://i.pinimg.com/originals/44/7f/20/447f2025170f8073574d75f63d0889ec.png" class="illustration" alt="Snoopy Flores">
-        <div class="scroll-hint" onclick="nextScreen(4)">▼</div>
-    </div>
-
-    <div id="s4" class="screen hidden">
-        <div class="number">4</div>
-        <p>Tengo una sorpresa más para ti...</p>
-        <div class="envelope" onclick="nextScreen(5)"></div>
-        <p style="font-size: 0.8rem; margin-top: 20px;">Da clic sobre la carta y descúbrelo</p>
-    </div>
-
-    <div id="s5" class="screen hidden">
-        <div class="number">5</div>
-        <div style="margin-bottom: 20px;">❤️❤️❤️❤️❤️❤️</div>
-        <div class="letter-content">
-            <p style="text-align: left;"><strong>De:</strong> Sebastian</p>
-            <p style="text-align: left;"><strong>Para:</strong> Luciana</p>
-            <h3 style="color: var(--accent-color);">Una carta para ti...</h3>
-            <p>
-                Luciana, quería recordarte lo mucho que te amo. Eres la persona que ilumina mis días y la razón de mis sonrisas más sinceras. 
-                Cada momento que compartimos, cada risa y cada detalle tuyo los guardo como el tesoro más grande.
-                Gracias por ser como eres, por tu alegría y por dejarme quererte tanto. Eres mi lugar favorito.
-            </p>
-            <p>Con todo mi amor,<br><strong>Sebastian</strong></p>
-        </div>
+        <img src="5.png.jpeg" alt="Parte 5" id="foto5">
     </div>
 
     <script>
-        function nextScreen(num) {
-            const current = document.querySelector('.screen.active');
-            const next = document.getElementById('s' + num);
-            
-            if (current) {
-                current.classList.remove('active');
-                current.classList.add('prev');
-            }
-            
-            next.classList.remove('hidden');
-            next.classList.add('active');
-        }
+        // Elementos de la página
+        const foto1 = document.getElementById('foto1');
+        const seccionDeslizable = document.getElementById('seccion-deslizable');
+        const foto4 = document.getElementById('foto4');
+        const foto5 = document.getElementById('foto5');
 
-        // Permitir deslizar hacia arriba en móvil
-        let touchstartY = 0;
-        let touchendY = 0;
-
-        document.addEventListener('touchstart', e => {
-            touchstartY = e.changedTouches[0].screenY;
+        // FUNCIÓN 1: Clic en Foto 1 (Ver Regalo)
+        foto1.addEventListener('click', function() {
+            seccionDeslizable.style.display = 'block'; // Muestra las fotos 2, 3 y 4
+            foto1.style.display = 'none'; // Oculta la foto 1
+            window.scrollTo(0, 0); // Sube al inicio de la nueva sección
         });
 
-        document.addEventListener('touchend', e => {
-            touchendY = e.changedTouches[0].screenY;
-            handleGesture();
+        // FUNCIÓN 2: Clic en Foto 4 (La Carta)
+        foto4.addEventListener('click', function() {
+            foto5.style.display = 'block'; // Muestra la foto 5
+            seccionDeslizable.style.display = 'none'; // Oculta todo lo anterior (2, 3, 4)
+            window.scrollTo(0, 0); // Sube al inicio de la sorpresa final
         });
-
-        function handleGesture() {
-            const currentId = parseInt(document.querySelector('.screen.active').id.replace('s', ''));
-            if (touchendY < touchstartY && currentId < 5 && currentId !== 1 && currentId !== 4) {
-                // Swipe up
-                nextScreen(currentId + 1);
-            }
-        }
     </script>
+
 </body>
 </html>
